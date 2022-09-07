@@ -131,6 +131,14 @@ def send_message(to_user, access_token, region_name, weather, temp, wind_dir, wi
     year = localtime().tm_year
     month = localtime().tm_mon
     day = localtime().tm_mday
+    time_zone=int(config["TimeZone"])
+    if time_zone !="":
+        if localtime().tm_hour+time_zone>24:
+            day=localtime().tm_mday+1
+            hour=(localtime().tm_hour+time_zone)-24
+        else:
+            day=localtime().tm_mday
+            hour=localtime().tm_hour+time_zone
     today = datetime.date(datetime(year=year, month=month, day=day))
     week = week_list[today.isoweekday() % 7]
     global wek 
